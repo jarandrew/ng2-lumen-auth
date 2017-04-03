@@ -1,0 +1,15 @@
+﻿<h3>All registered customers:</h3>
+<p>
+    <a [routerLink]="['/customers/new']" class="btn btn-success">Add New</a>
+</p>
+<table class="table">
+    <tbody>
+        <tr *ngFor="let customer of customers">
+            <th>{{customer.name}}</th>
+            <td>{{customer.phone}}</td>
+            <td>{{customer.address}}</td>
+            <td><a [routerLink]="['/customers/' + customer.id]" class="btn btn-link">Edit</a>&nbsp;|&nbsp;
+                <a (click)="delete(customer.id)" class="btn btn-link">Delete</a></td>
+        </tr>
+    </tbody>
+</table>

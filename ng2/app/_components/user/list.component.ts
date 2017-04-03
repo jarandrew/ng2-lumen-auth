@@ -1,14 +1,14 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User, Customer } from '../_models/index';
-import { AuthenticationService, CustomerService } from '../_services/index';
+import { User, Customer } from '../../_models/index';
+import { AuthenticationService, CustomerService } from '../../_services/index';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'home.component.html'
+    templateUrl: 'list.component.html'
 })
 
-export class HomeComponent implements OnInit {
+export class UserListComponent implements OnInit {
     currentUser: User;
     customers: Customer[] = [];
 

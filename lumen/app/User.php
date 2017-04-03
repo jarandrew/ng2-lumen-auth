@@ -22,7 +22,7 @@ class User extends Model implements
      * @var array
      */
     protected $fillable = [
-        'username', 'email'
+        'username', 'email', 'role'
     ];
 
     /**
@@ -40,7 +40,8 @@ class User extends Model implements
             'sub' => $this->id,
             'exp' => time() + 7200,
             'context' => [
-                'email' => $this->email
+                'email' => $this->email,
+                'role' => $this->role
             ]
         ];
     }

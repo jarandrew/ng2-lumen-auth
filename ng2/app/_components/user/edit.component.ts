@@ -1,15 +1,15 @@
 ﻿import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { Customer } from '../_models/index';
-import { AlertService, CustomerService } from '../_services/index';
+import { Customer } from '../../_models/index';
+import { AlertService, CustomerService } from '../../_services/index';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'customer.component.html'
+    templateUrl: 'edit.component.html'
 })
 
-export class CustomerComponent {
+export class UserEditComponent {
     customer: Customer;
     loading = false;
     paramsSub: Subscription;

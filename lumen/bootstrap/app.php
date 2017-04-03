@@ -59,12 +59,12 @@ $app->singleton(
 */
 
 $app->middleware([
-   App\Http\Middleware\CorsMiddleware::class
+    App\Http\Middleware\CorsMiddleware::class
 ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'checkAdmin' => App\Http\Middleware\AdminCheck::class,
+]);
 
 // $app->routeMiddleware([
 // 	'authToken' => App\Http\Middleware\AuthToken::class,

@@ -15,16 +15,29 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
-$app->post('login', 'UserController@login');
+$app->post('login', 'AuthController@login');
 
-$app->post('signup', 'UserController@signup');
+$app->post('signup', 'AuthController@signup');
 
 $app->group(['middleware' => 'jwt', 'namespace' => 'App\Http\Controllers'], function($app)  {
-    $app->get('me', 'UserController@get');
+    /* Profile API */
+    $app->get('me', 'UserController@getProfile');
+    $app->post('me', 'UserController@saveProfile');
 
-		$app->get('customers', 'CustomerController@index');
-		$app->post('customers', 'CustomerController@create');
-		$app->get('customers/{id}', 'CustomerController@get');
-		$app->patch('customers/{id}', 'CustomerController@update');
-		$app->delete('customers/{id}', 'CustomerController@delete');
+    /* Admin API */
+    $app->group(['middleware' => 'checkAdmin', 'namespace' => 'App\Http\Controllers'], function($app) {
+        /* Users API */
+        $app->get('users', 'UserController@index');
+        $app->post('users', 'UserController@create');
+        $app->get('users/{id}', 'UserController@get');
+        $app->patch('users/{id}', 'UserController@update');
+        $app->delete('users/{id}', 'UserController@delete');
+
+        /* Customers API */
+        $app->get('customers', 'CustomerController@index');
+        $app->post('customers', 'CustomerController@create');
+        $app->get('customers/{id}', 'CustomerController@get');
+        $app->patch('customers/{id}', 'CustomerController@update');
+        $app->delete('customers/{id}', 'CustomerController@delete');
+    });
 });
