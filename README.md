@@ -16,7 +16,7 @@ This is example of Angular2, Laravel/Lumen, Authentication with JWT.
 
 ### Setup & Run
 
-Update contens in .env 
+Update contens in .env, you need to set smpt server and account there. 
 
     $ php -S localhost:8000 -t public
 

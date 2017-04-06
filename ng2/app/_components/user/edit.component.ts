@@ -1,8 +1,8 @@
 ﻿import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { Customer } from '../../_models/index';
-import { AlertService, CustomerService } from '../../_services/index';
+import { User } from '../../_models/index';
+import { AlertService, UserService } from '../../_services/index';
 
 @Component({
     moduleId: module.id,
@@ -10,56 +10,65 @@ import { AlertService, CustomerService } from '../../_services/index';
 })
 
 export class UserEditComponent {
-    customer: Customer;
+    user: User;
     loading = false;
     paramsSub: Subscription;
-    customerId: number;
+    userId: number;
+    roles: any[];
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private customerService: CustomerService,
+        private userService: UserService,
         private alertService: AlertService
     ) {
-        this.customer = new Customer();
+        this.user = new User();
     }
 
     ngOnInit() {
         this.paramsSub = this.route.params
             .map(params => params['id'])
-            .subscribe(customerId => {
-                if (customerId) {
-                    this.customerId = customerId;
-                    this.customerService.getById(customerId).subscribe(response => {
-                        this.customer = response;
-                    })
+            .subscribe(userId => {
+                this.userId = userId;
+                if (userId > 0) {
+                    this.userService.getById(userId).subscribe(response => {
+                        this.user = response;
+                    });
                 }
             });
+
+        this.roles = [
+            { role: 0, title: 'Member' },
+            { role: 1, title: 'Subscriber' },
+            { role: 9, title: 'Administrator' },
+        ]
     }
 
     save() {
         this.loading = true;
-        if(this.customerId) {
-            this.customerService.update(this.customer)
+        if(this.userId > 0) {
+            this.userService.update(this.user)
                 .subscribe(
                     data => {
-                        this.alertService.success('Customer updated successfully!', true);
-                        this.router.navigate(['/']);
+                        this.alertService.success('User updated successfully!', true);
+                        this.router.navigate(['/users']);
                     },
                     error => {
-                        this.alertService.error(error);
+                        const message = error.json();
+                        this.alertService.error(message.error);
                         this.loading = false;
                     });
         }
         else {
-            this.customerService.create(this.customer)
+            this.userService.create(this.user)
                 .subscribe(
                     data => {
-                        this.alertService.success('Customer added successfully!', true);
-                        this.router.navigate(['/']);
+                        this.alertService.success('User added successfully!', true);
+                        this.router.navigate(['/users']);
                     },
                     error => {
-                        this.alertService.error(error);
+                        const message = error.json();
+                        this.alertService.error(message.error);
                         this.loading = false;
                     });
         }

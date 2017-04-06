@@ -3,3 +3,8 @@
 <p>
     <a [routerLink]="['/profile']" class="btn btn-success">Edit Your Profile</a>
 </p>
+<p></p>
+<h3>You have administrator permission</h3>
+<p *ngIf="currentUser.user.role == 9">
+    <a [routerLink]="['/users']" class="btn btn-success">Manage Users</a>
+</p>

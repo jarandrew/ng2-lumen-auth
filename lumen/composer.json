@@ -8,7 +8,9 @@
         "php": ">=5.5.9",
         "laravel/lumen-framework": "5.2.*",
         "vlucas/phpdotenv": "~2.2",
-        "generationtux/jwt-artisan": "^0.1.8"
+        "generationtux/jwt-artisan": "^0.1.8",
+        "guzzlehttp/guzzle": "^6.2",
+        "illuminate/mail": "^5.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

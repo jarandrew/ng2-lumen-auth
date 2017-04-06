@@ -15,7 +15,7 @@ class AuthController extends Controller
     private $salt;
     public function __construct()
     {
-        $this->salt="userloginregister";
+        $this->salt = env('APP_SALT', "app_salt");
     }
 
     public function login(Request $request, JwtToken $jwt) {

@@ -16,8 +16,10 @@ $app->get('/', function () use ($app) {
 });
 
 $app->post('login', 'AuthController@login');
-
 $app->post('signup', 'AuthController@signup');
+// $app->post('forgot-password', 'AuthController@forgotPassword');
+$app->post('password/email', 'PasswordController@postEmail');
+$app->post('password/reset', 'PasswordController@postReset');
 
 $app->group(['middleware' => 'jwt', 'namespace' => 'App\Http\Controllers'], function($app)  {
     /* Profile API */

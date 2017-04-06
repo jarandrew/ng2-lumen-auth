@@ -13,9 +13,11 @@ class UserController extends Controller
 {
     use GetsJwtToken;
 
+    private $salt;
     public function __construct(User $user)
     {
         $this->user = $user;
+        $this->salt = env('APP_SALT', "app_salt");
     }
 
     public function getProfile() {
@@ -78,6 +80,7 @@ class UserController extends Controller
           $user->username = $request->input('username');
           $user->email = $request->input('email');
           $user->role = $role;
+          $user->password = sha1($this->salt.$request->input('password'));
           $user->save();
           
           return response($user, 201);
@@ -113,6 +116,9 @@ class UserController extends Controller
               $user->username = $request->input('username');
               $user->email = $request->input('email');
               $user->role = $role;
+              if($request->input('password')) {
+                  $user->password = sha1($this->salt.$request->input('password'));
+              }
               $user->save();
 
               return response($user);

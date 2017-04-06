@@ -25,6 +25,9 @@ $app = new Laravel\Lumen\Application(
 
 $app->withFacades();
 $app->withEloquent();
+$app->configure('auth');
+$app->configure('services');
+$app->configure('mail');
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +85,8 @@ $app->routeMiddleware([
 */
 
 $app->register(App\Providers\AppServiceProvider::class);
+$app->register(\Illuminate\Auth\Passwords\PasswordResetServiceProvider::class);
+$app->register(\Illuminate\Mail\MailServiceProvider::class);
 $app->register(App\Providers\CatchAllOptionsRequestsProvider::class);
 $app->register(GenTux\Jwt\Support\LumenServiceProvider::class);
 

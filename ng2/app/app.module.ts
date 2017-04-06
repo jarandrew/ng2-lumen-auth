@@ -13,8 +13,8 @@ import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
 import { AlertService, AuthenticationService, UserService, CustomerService } from './_services/index';
 import { HomeComponent } from './_components/home/index';
-import { UserListComponent, UserEditComponent } from './_components/user/index';
-import { LoginComponent, RegisterComponent } from './_components/auth/index';
+import { UserListComponent, UserEditComponent, ProfileComponent } from './_components/user/index';
+import { LoginComponent, RegisterComponent, PasswordComponent, ForgotPasswordComponent, ResetPasswordComponent } from './_components/auth/index';
 
 @NgModule({
     imports: [
@@ -31,6 +31,10 @@ import { LoginComponent, RegisterComponent } from './_components/auth/index';
         HomeComponent,
         UserListComponent,
         UserEditComponent,
+        ProfileComponent,
+        PasswordComponent,
+        ForgotPasswordComponent,
+        ResetPasswordComponent,
     ],
     providers: [
         AuthGuard,

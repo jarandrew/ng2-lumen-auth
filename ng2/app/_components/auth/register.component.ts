@@ -26,7 +26,8 @@ export class RegisterComponent {
                     this.router.navigate(['/login']);
                 },
                 error => {
-                    this.alertService.error(error);
+                    const message = error.json();
+                    this.alertService.error(message.error);
                     this.loading = false;
                 });
     }

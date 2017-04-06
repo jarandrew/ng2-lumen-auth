@@ -14,4 +14,24 @@ export class UserService {
         return this.api.post('/signup', user, false);
     }
 
+    getAll() {
+        return this.api.get('/users');
+    }
+
+    getById(id: number) {
+        return this.api.get('/users/' + id);
+    }
+
+    create(user: User) {
+        return this.api.post('/users', user);
+    }
+
+    update(user: User) {
+        return this.api.patch('/users/' + user.id, user);
+    }
+
+    delete(id: number) {
+        return this.api.delete('/users/' + id);
+    }
+
 }
