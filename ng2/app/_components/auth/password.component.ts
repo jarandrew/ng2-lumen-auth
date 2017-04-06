@@ -43,8 +43,9 @@ export class PasswordComponent {
                     this.alertService.success('User updated successfully!', true);
                     this.loading = false;
                 },
-                err => {
-                    this.alertService.error(err.error);
+                error => {
+                    const message = error.json();
+                    this.alertService.error(message.error);
                     this.loading = false;
                 });
         }
